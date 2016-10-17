@@ -3,12 +3,14 @@
 	if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 	}
-	echo $mysqli->host_info . "\n";
-
-	/*$mysqli = new mysqli("127.0.0.1", "usuario", "contraseña", "basedatos", 3306);
-	if ($mysqli->connect_errno) {
-	    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+	$con 	=	"SELECT * FROM `anunci` ";
+	$result	=	mysqli_query($mysqli,$con);
+	/*$rows	=	mysqli_fetch_array($result);
+	foreach ($rows as $key => $value) {
+		echo $value . "<br/>";
 	}*/
+	while ($fila = mysqli_fetch_row($result)) {
+        echo "id: "	.  $fila[0] . " titulo: " . $fila[1] . "<br/>";
+    }
 
-	echo $mysqli->host_info . "\n";
 		echo "hola <a href='../../indice.html'> Pulsa aquí para volver</a>";
