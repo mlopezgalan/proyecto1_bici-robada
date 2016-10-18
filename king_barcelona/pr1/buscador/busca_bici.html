@@ -5,10 +5,32 @@
 <head>
 	<title>Encuentra mi bici!</title>
 	<link rel="stylesheet" type="text/css" href="../../kingbarcelona_files/style.css">
+	<script>
+		function habilitar(){
+				/*if(document.getElementsByName("color2").style.visibility = "hidden")
+				{
+					document.getElementsByName("color2").style.visibility = 'inline';
+				}
+				else
+				{
+					document.getElementsByName("color2").style.visibility = 'hidden';
+				}
+				*/
+				if(document.getElementById('other').checked)
+				{
+					document.getElementById("color2").style.display = "block";
+				}
+				else
+				{
+					document.getElementById("color2").style.display = "none";
+				}
+				
+			}
+	</script>
 </head>
 <body>
 
-	<form action="busca_bici.php" method="POST">
+	<form name="search"action="busca_bici.php" method="POST">
 		<table class="login_box" border>
 			<tr>
 				<td>
@@ -48,7 +70,7 @@
 				</td>
 				<td>
 					<select name="color">
-						<option value="*" selected> Todas</option>
+						<option value="0" selected> Selecione un color</option>
 						<option value="blanco"> Blanco</option>
 						<option value="negro"> Negro</option>
 						<option value="rojo">Rojo</option>	
@@ -71,9 +93,9 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="checkbox" name="other">¿Otro color?</td>
-						<select name="color" style="visibility: hidden;">
-							<option value="*" selected> Todas</option>
+					<input type="checkbox" name="other" id="other" onclick="habilitar();">¿Otro color?
+						<select name="color2" id="color2" style="display: none;">
+							<option value="0" selected> Selecione un color</option>
 							<option value="blanco"> Blanco</option>
 							<option value="negro"> Negro</option>
 							<option value="rojo">Rojo</option>	
