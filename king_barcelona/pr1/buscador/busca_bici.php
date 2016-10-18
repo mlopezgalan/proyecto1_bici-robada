@@ -1,34 +1,5 @@
 
-<!DOCTYPE html>
-<meta charset="utf-8">
-<html>
-<head>
-	<title>Encuentra mi bici!</title>
-	<link rel="stylesheet" type="text/css" href="../../kingbarcelona_files/style.css">
-</head>
-<body>
-
-	<form action="busca_bici.php">
-		<table class="login_box" border>
-			<tr>
-				<td>
-					Titulo:
-				</td>
-				<td>
-					<input type="textbox" name="title">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Fecha:
-				</td>
-				<td>
-					<input type="date" name="theft_date">
-				</td>
-			</tr>
-		</table>
-	</form>
-	<?php
+<?php
 	$mysqli = new mysqli("localhost", "root", "", "projecte_1");
 	if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -44,10 +15,7 @@
     }
 
 		//echo "hola <a href='../../indice.html'> Pulsa aquí para volver</a>";
-	?>
-
-</body>
-</html>
+?>
 
 
 

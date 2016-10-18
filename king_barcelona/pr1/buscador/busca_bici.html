@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title>Encuentra mi bici!</title>
+	<link rel="stylesheet" type="text/css" href="../../kingbarcelona_files/style.css">
+</head>
+<body>
+
+	<form action="busca_bici.php" method="POST">
+		<table class="login_box" border>
+			<tr>
+				<td>
+					Titulo:
+				</td>
+				<td>
+					<input type="textbox" name="title">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Fecha:
+				</td>
+				<td>
+					<input type="date" name="theft_date">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Ubicación:
+				</td>
+				<td>
+					<input type="text" name="location">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Marca:
+				</td>
+				<td>
+					<input type="date" name="brand">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Color:
+				</td>
+				<td>
+					<select name="color">
+						<option value="*" selected> Todas</option>
+						<option value="blanco"> Blanco</option>
+						<option value="negro"> Negro</option>
+						<option value="rojo">Rojo</option>	
+						<option value="azul"> Azul</option>
+						<option value="verde"> Verde</option>
+						<option value="amarillo"> Amarillo</option>
+						<option value="naranja"> Naranja</option>
+						<option value="negro"> Negro</option>
+
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Modelo:
+				</td>
+				<td>
+					<input type="date" name="model">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="checkbox" name="other">¿Otro color?</td>
+						<select name="color" style="visibility: hidden;">
+							<option value="*" selected> Todas</option>
+							<option value="blanco"> Blanco</option>
+							<option value="negro"> Negro</option>
+							<option value="rojo">Rojo</option>	
+							<option value="azul"> Azul</option>
+							<option value="verde"> Verde</option>
+							<option value="amarillo"> Amarillo</option>
+							<option value="naranja"> Naranja</option>
+							<option value="negro"> Negro</option>
+
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Compensación</td>
+				<td>
+					<input type="textbox" name="compensation">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><button >Encuéntrala!</button></td>
+		</table>
+	</form>
+</body>
+</html>
