@@ -6,38 +6,64 @@
 	<title>Encuentra mi bici!</title>
 	<link rel="stylesheet" type="text/css" href="../../kingbarcelona_files/style.css">
 	<script>
+		//Funcion para validar  el formulario 
+		function validar()
+		{
+			var error="a";
+			if(document.getElementById("brand").value=="")
+			{
+				error+="Error, la marca es obligatoria \n";
+			}
+			if(document.getElementById("color").vakue==0)
+			{
+				error+="Error, el color es obligatorio \n";
+			}
+			if(error!="")
+			{
+				alert(error);
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		//END VALIDAR()
+
+		//Funcion para la caja otro color.
 		function habilitar(){
-				/*if(document.getElementsByName("color2").style.visibility = "hidden")
+				// Comprobamos que hemos puesto un color previamente
+				if(document.getElementById('color').value=="0")
 				{
-					document.getElementsByName("color2").style.visibility = 'inline';
+
+					alert("Debes seleccionar un color antes!");
+					document.getElementById('other').checked = 0;
 				}
-				else
+				//Comprobamos que hemos chequeado el textbox
+				else if( document.getElementById('other').checked)
 				{
-					document.getElementsByName("color2").style.visibility = 'hidden';
+					
+						document.getElementById("color2").style.display = "block";
 				}
-				*/
-				if(document.getElementById('other').checked)
-				{
-					document.getElementById("color2").style.display = "block";
-				}
+				//Lo ocultamos, por si el usuario desechequea el textbox
 				else
 				{
 					document.getElementById("color2").style.display = "none";
 				}
 				
 			}
+		//END HABILITAR()
 	</script>
 </head>
 <body>
 
-	<form name="search"action="busca_bici.php" method="POST">
+	<form name="search" onsubmit="return validar();"  action="busca_bici.php" method="POST">
 		<table class="login_box" border>
 			<tr>
 				<td>
 					Titulo:
 				</td>
 				<td>
-					<input type="textbox" name="title">
+					<input type="textbox" name="title" id="title">
 				</td>
 			</tr>
 			<tr>
@@ -45,7 +71,7 @@
 					Fecha del robatorio:
 				</td>
 				<td>
-					<input type="date" name="theft_date">
+					<input type="date" name="theft_date" id="theft_date">
 				</td>
 			</tr>
 			<tr>
@@ -53,7 +79,7 @@
 					Ubicación:
 				</td>
 				<td>
-					<input type="text" name="location">
+					<input type="text" name="location" id="location">
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +87,7 @@
 					Marca:
 				</td>
 				<td>
-					<input type="text" name="brand">
+					<input type="text" name="brand" id="brand">
 				</td>
 			</tr>
 			<tr>
@@ -69,7 +95,7 @@
 					Color:
 				</td>
 				<td>
-					<select name="color">
+					<select name="color" id="color">
 						<option value="0" selected> Selecione un color</option>
 						<option value="blanco"> Blanco</option>
 						<option value="negro"> Negro</option>
@@ -104,7 +130,7 @@
 					Modelo:
 				</td>
 				<td>
-					<input type="text" name="model">
+					<input type="text" name="model" id="model">
 				</td>
 			</tr>
 			
@@ -113,7 +139,7 @@
 			<tr>
 				<td>Compensación</td>
 				<td>
-					<input type="textbox" name="compensation">
+					<input type="textbox" name="compensation" id="compensation">
 				</td>
 			</tr>
 			<tr>
