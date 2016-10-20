@@ -1,0 +1,28 @@
+ .s_title{
+
+ 	font: bold 11px Verdana;
+    color: white;
+    background: #ff5e00 8px 6px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    padding: 2px 0 2px 15px;
+    margin: 0;
+    text-align: center;
+}
+.s_ind{
+	background-color: #146db4;
+	font-weight: bold;
+	color: white;
+}
+
+.not_found{
+	background-color: red;
+	font-weight: bold;
+	color: white;
+	font-size:32px;
+}
+
+.s_content{
+	text-align: center;
+	font-weight: bold;
+}

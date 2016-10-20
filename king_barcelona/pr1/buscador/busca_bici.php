@@ -2,9 +2,10 @@
 	<head>
 		<meta charset="utf-8">
 		<title>busca mi bici</title>
+		<link rel="stylesheet" type="text/css" href="./search_css.css">
 	</head>
 	<body>
-<table border width="90%">
+<table border width="100%" height="100%">
 <?php
 	//Extraemos las variables que recibimos del formulario
 	extract($_POST);
@@ -67,7 +68,7 @@
 
 		//CONDICION MARCA
 		//echo $brand;die;
-		if($brand!="")
+		if($brand!=0 OR $brand!="all")
 		{
 				if($condicion>0)
 				{
@@ -94,13 +95,13 @@
 
 				if($condicion>0)
 				{
-					$con.=" AND (`anu_color` = '$color')";
+					$con.=" AND (`anu_color` LIKE '%$color%')";
 				}
 			
 		else
 			{
 				$condicion++;
-				$con.=	" `anu_color` = '$color'";
+				$con.=	" `anu_color`LIKE '%$color%'";
 			}
 		}
 		//END CONDICION COLOR
@@ -143,40 +144,48 @@
 	//END CONSULTA SELECCION
 		//echo $condicion;
 		
-		echo $con . "<br/>";
+		//echo $con;die;
 	
 	$result	=	mysqli_query($mysqli,$con);
-	print_r($result);
-	
-	if(!is_null($result) )
+	 $total  = mysqli_num_rows($result); 
+  	if($total!=0)
+
 	{
 	
 		while ($fila = mysqli_fetch_row($result)) 
 		{
 	       echo "<tr>";
-	      	 echo "<td colspan='4' name='title'><a href='ficha.php?id=".$fila[0]."'target='_blank'>$fila[1]</a></td>";
+	      	 echo "<td colspan='4' name='title' class='s_title'><a href='ficha.php?id=".$fila[0]."'target='_blank'>$fila[1]</a></td>";
 	       echo "</tr>";
 	       echo "<tr>";
-	     	  echo "<td>Fecha de publicación</td>";
-	     	  echo "<td>$fila[2]</td>";
-	     	  echo "<td>Fecha del robo</td>";
-	      	 echo "<td>$fila[3]</td>";
+	     	  echo "<td class='s_ind'>Fecha de publicación</td>";
+	     	  echo "<td class='s_content'>$fila[2]</td>";
+	     	  echo "<td class='s_ind'>Fecha del robo</td>";
+	      	 echo "<td class='s_content'>$fila[3]</td>";
 	       echo "<tr>";
-	     	  echo "<td style='max-width: 25px;'><img src='../../bicis/"	.	$fila[5]	. "' style='width: 100%;' />
-				</td>";
-				echo "<td colspan='3'> $fila[4]</td>";
+	        if(file_exists("../../bicis/".$fila[5])){
+	        		 echo  "<td style='max-width: 25px;'><img src='../../bicis/"  . $fila[5]  . "' style='width: 100%;' /> </td>";
+        		 
+       		  }
+      		   else
+       		  {
+      			    echo "<td style='max-width: 25px;'><img src='../../bicis/nodisponible.jpg' ' style='width: 100%;'></td>";
+       		  }
+       		  echo "<td colspan='3'class='s_content'>" . $fila[4] . "</td>";
+       		 echo "</tr>";
 			echo "<tr>";
 				if(empty($fila[6])){
-					echo "<td colspan='4'><center>Sin recompensa</center></td>";
+					echo "<td colspan='4' class='s_content'>Sin recompensa</td>";
 				}
 				else{
-					echo "<td colspan='4'><center>Recomensa: $fila[6]€</center></td>";
+					echo "<td colspan='4' class='s_content'>Recompensa: $fila[6]€</td>";
 				}
 			echo "</tr>";
 	    }
     }
-    else{
-    	echo "Lo siento, no hemos podido encontrar tu bicicleta";
+    else
+    {
+    	echo "<tr><td class='not_found'>Lo siento, no hemos podido encontrar tu bicicleta :( </td></tr>";
     }
 
 		//echo "hola <a href='../../indice.html'> Pulsa aquí para volver</a>";
