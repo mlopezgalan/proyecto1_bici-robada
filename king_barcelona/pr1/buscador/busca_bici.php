@@ -50,8 +50,8 @@
 		}
 		//END CONDICION FECHA ROBO
 
-		//CONDICION ROBO
-		if($location!="")
+		//CONDICION UBICACION
+		if($location!="" AND $location!=0)
 		{
 			if($condicion>0)
 			{
@@ -143,32 +143,40 @@
 	//END CONSULTA SELECCION
 		//echo $condicion;
 		
-		//echo $con;die;
+		echo $con . "<br/>";
 	
 	$result	=	mysqli_query($mysqli,$con);
-	//echo $result;die;
-	while ($fila = mysqli_fetch_row($result)) 
+	print_r($result);
+	
+	if(!is_null($result) )
 	{
-       echo "<tr>";
-      	 echo "<td colspan='4' name='title'><a href='ficha.php?id=".$fila[0]."'target='_blank'>$fila[1]</a></td>";
-       echo "</tr>";
-       echo "<tr>";
-     	  echo "<td>Fecha de publicación</td>";
-     	  echo "<td>$fila[2]</td>";
-     	  echo "<td>Fecha del robo</td>";
-      	 echo "<td>$fila[3]</td>";
-       echo "<tr>";
-     	  echo "<td style='max-width: 25px;'><img src='../../bicis/"	.	$fila[5]	. "' style='width: 100%;' />
-			</td>";
-			echo "<td colspan='3'> $fila[4]</td>";
-		echo "<tr>";
-			if(empty($fila[6])){
-				echo "<td colspan='4'><center>Sin recompensa</center></td>";
-			}
-			else{
-				echo "<td colspan='4'><center>Recomensa: $fila[6]€</center></td>";
-			}
-		echo "</tr>";
+	
+		while ($fila = mysqli_fetch_row($result)) 
+		{
+	       echo "<tr>";
+	      	 echo "<td colspan='4' name='title'><a href='ficha.php?id=".$fila[0]."'target='_blank'>$fila[1]</a></td>";
+	       echo "</tr>";
+	       echo "<tr>";
+	     	  echo "<td>Fecha de publicación</td>";
+	     	  echo "<td>$fila[2]</td>";
+	     	  echo "<td>Fecha del robo</td>";
+	      	 echo "<td>$fila[3]</td>";
+	       echo "<tr>";
+	     	  echo "<td style='max-width: 25px;'><img src='../../bicis/"	.	$fila[5]	. "' style='width: 100%;' />
+				</td>";
+				echo "<td colspan='3'> $fila[4]</td>";
+			echo "<tr>";
+				if(empty($fila[6])){
+					echo "<td colspan='4'><center>Sin recompensa</center></td>";
+				}
+				else{
+					echo "<td colspan='4'><center>Recomensa: $fila[6]€</center></td>";
+				}
+			echo "</tr>";
+	    }
+    }
+    else{
+    	echo "Lo siento, no hemos podido encontrar tu bicicleta";
     }
 
 		//echo "hola <a href='../../indice.html'> Pulsa aquí para volver</a>";

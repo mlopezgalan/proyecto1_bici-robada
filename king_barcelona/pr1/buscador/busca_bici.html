@@ -9,14 +9,16 @@
 		//Funcion para validar  el formulario 
 		function validar()
 		{
-			var error="a";
+			var error="";
 			if(document.getElementById("brand").value=="")
 			{
 				error+="Error, la marca es obligatoria \n";
+				document.getElementById("brand").style.borderColor="red";
 			}
-			if(document.getElementById("color").vakue==0)
+			if(document.getElementById("color").value==0)
 			{
 				error+="Error, el color es obligatorio \n";
+				document.getElementById("color").style.borderColor="red";
 			}
 			if(error!="")
 			{
@@ -79,7 +81,62 @@
 					Ubicación:
 				</td>
 				<td>
-					<input type="text" name="location" id="location">
+					    <select name="location">
+    					<option value='0'>(Seleccionar)</option>
+    					<option value='alava'>Álava</option>
+    					<option value='albacete'>Albacete</option>
+				    	<option value='alicante'>Alicante</option>
+				    	<option value='almeria'>Almería</option>
+				    	<option value='asturias'>Asturias</option>
+				    	<option value='avila'>Ávila</option>
+				    	<option value='badajoz'>Badajoz</option>
+				    	<option value='barcelona'>Barcelona</option>
+				    	<option value='burgos'>Burgos</option>
+				    	<option value='caceres'>Cáceres</option>
+				    	<option value='cadiz'>Cádiz</option>
+				    	<option value='cantabria'>Cantabria</option>
+				    	<option value='castellon'>Castellón</option>
+				    	<option value='ceuta'>Ceuta</option>
+				    	<option value='ciudad-real'>Ciudad Real</option>
+				    	<option value='Cordoba'>Córdoba</option>
+				    	<option value='Cuenca'>Cuenca</option>
+				    	<option value='Girona'>Girona</option>
+				    	<option value='las_palmas'>Las Palmas</option>
+				    	<option value='Granada'>Granada</option>
+				    	<option value='Guadalajara'>Guadalajara</option>
+				    	<option value='Guipuzcoa'>Guipúzcoa</option>
+				    	<option value='Huelva'>Huelva</option>
+				    	<option value='Huesca'>Huesca</option>
+				    	<option value='Balears'>Illes Balears</option>
+				    	<option value='Jaen'>Jaén</option>
+				    	<option value='Coruna'>A Coruña</option>
+				    	<option value='Rioja'>La Rioja</option>
+				    	<option value='Leon'>León</option>
+				    	<option value='Lleida'>Lleida</option>
+				    	<option value='Lugo'>Lugo</option>
+				    	<option value='Madrid'>Madrid</option>
+				    	<option value='Malaga'>Málaga</option>
+				    	<option value='Melilla'>Melilla</option>
+				    	<option value='Murcia'>Murcia</option>
+				    	<option value='Navarra'>Navarra</option>
+				    	<option value='Ourense'>Ourense</option>
+				    	<option value='Palencia'>Palencia</option>
+				    	<option value='Pontevedra'>Pontevedra</option>
+				    	<option value='Salamanca'>Salamanca</option>
+				    	<option value='Segovia'>Segovia</option>
+				    	<option value='Sevilla'>Sevilla</option>
+				    	<option value='Soria'>Soria</option>
+				    	<option value='Tarragona'>Tarragona</option>
+				    	<option value='santa-cruz-tenerife'>Santa Cruz de Tenerife</option>
+				    	<option value='Teruel'>Teruel</option>
+				    	<option value='Toledo'>Toledo</option>
+				    	<option value='Valencia'>Valéncia</option>
+				    	<option value='Valladolid'>Valladolid</option>
+				    	<option value='Vizcaya'>Vizcaya</option>
+				    	<option value='Zamora'>Zamora</option>
+				    	<option value='Zaragoza'>Zaragoza</option>
+						<option value='all'>Todas</option>
+				    </select>
 				</td>
 			</tr>
 			<tr>
@@ -88,6 +145,14 @@
 				</td>
 				<td>
 					<input type="text" name="brand" id="brand">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Modelo:
+				</td>
+				<td>
+					<input type="text" name="model" id="model">
 				</td>
 			</tr>
 			<tr>
@@ -105,9 +170,10 @@
 						<option value="amarillo"> Amarillo</option>
 						<option value="naranja"> Naranja</option>
 						<option value="negro"> Negro</option>
-
+						<option value="otro"> Otro</option>
 				</select>
 				</td>
+				</tr>
 				<tr>
 					<td colspan="2">
 						<input type="checkbox" name="other" id="other" onclick="habilitar();">¿Otro color?
@@ -124,17 +190,6 @@
 	
 						</select>
 					</td>
-			</tr>
-			<tr>
-				<td>
-					Modelo:
-				</td>
-				<td>
-					<input type="text" name="model" id="model">
-				</td>
-			</tr>
-			
-			
 			</tr>
 			<tr>
 				<td>Compensación</td>
