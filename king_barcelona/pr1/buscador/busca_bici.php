@@ -147,21 +147,25 @@
 		//echo $con;die;
 	
 	$result	=	mysqli_query($mysqli,$con);
-	 $total  = mysqli_num_rows($result); 
+	$total  = mysqli_num_rows($result); 
   	if($total!=0)
 
 	{
 	
 		while ($fila = mysqli_fetch_row($result)) 
 		{
+			//Formateamos las fechas al estilo europeo
+			$newTheftDate	=	date("d-m-Y",strtotime($fila[3]));
+			$newPublicDate	=	date("d-m-Y",strtotime($fila[2]));
+			//echo $newDate;die;
 	       echo "<tr>";
 	      	 echo "<td colspan='4' name='title' class='s_title'><a href='ficha.php?id=".$fila[0]."'target='_blank'>$fila[1]</a></td>";
 	       echo "</tr>";
 	       echo "<tr>";
 	     	  echo "<td class='s_ind'>Fecha de publicación</td>";
-	     	  echo "<td class='s_content'>$fila[2]</td>";
+	     	  echo "<td class='s_content'>$newPublicDate</td>";
 	     	  echo "<td class='s_ind'>Fecha del robo</td>";
-	      	 echo "<td class='s_content'>$fila[3]</td>";
+	      	 echo "<td class='s_content'>$newTheftDate</td>";
 	       echo "<tr>";
 	        if(file_exists("../../bicis/".$fila[5])){
 	        		 echo  "<td style='max-width: 25px;'><img src='../../bicis/"  . $fila[5]  . "' style='width: 100%;' /> </td>";

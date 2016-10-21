@@ -223,6 +223,7 @@
                                 <option value='Evil'>Evil</option>
                                 <option value='Decathlon'>Decathlon</option>
                                 <option value='Bicing'>Bicing</option>
+                                <option value='BH'>BH</option>
                                 <option value='otras'>otras</option>
                                 <option value='all'>todas</option>
                             </select>
@@ -311,14 +312,16 @@
 <!-- footer //-->
 </td></tr><tr><td colspan="3">
 <center>
-<table border="0" width="55%" cellspacing="0" cellpadding="1">
-  <tbody><tr class="footer">
-    <td class="footer">lunes 17 octubre, 2016</td>
-    <td align="right" class="footer">&nbsp;&nbsp;278.934.827 peticiones desde jueves 01 junio, 2006&nbsp;&nbsp;</td>
-  </tr>
-  <tr><td class="subBar" align="center" colspan="2"><a href="https://www.confianzaonline.es/empresas/kingbarcelona.htm" target="_blank"><img src="../../kingbarcelona_files/sellomedianoanimado.gif" border="0" alt="Entidad adherida a Confianza Online"></a></td></tr>
-  <tr><td class="subBar" align="center" colspan="2">King Barcelona S.L. - CIF B65238628 - Registro mercantil 163252/105430 | c/ Pau Muñoz i Castanyer 16 Local 4, 08174 Sant Cugat del Vallés (España)</td></tr>
-</tbody></table></center>
+    <table border="0" width="1060px" cellspacing="0" cellpadding="1">
+    <tbody><tr class="footer">
+     <td class="footer">lunes 17 octubre, 2016</td>
+     <td align="right" class="footer">&nbsp;&nbsp;278.934.827 peticiones desde jueves 01 junio, 2006&nbsp;&nbsp;</td>
+    </tr>
+    <tr><td class="subBar" align="center" colspan="2"><a href="https://www.confianzaonline.es/empresas/kingbarcelona.htm" target="_blank"><img src="../../kingbarcelona_files/sellomedianoanimado.gif" border="0" alt="Entidad adherida a Confianza Online"></a></td></tr>
+    <tr><td class="subBar" align="center" colspan="2">King Barcelona S.L. - CIF B65238628 - Registro mercantil 163252/105430 | c/ Pau Muñoz i Castanyer 16 Local 4, 08174 Sant Cugat del Vallés (España)</td></tr>
+  </tbody>
+  </table>
+  </center>
 
 <div align="center">
 <a href="http://validator.w3.org/check?uri=referer" target="_new"><img src="../../kingbarcelona_files/valid-html401-blue" alt="Valid HTML 4.01 Transitional" height="31" width="88" border="0"></a>
