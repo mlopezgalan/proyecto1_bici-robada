@@ -92,9 +92,9 @@
          echo "</tr>";
          echo "<tr>";
           echo "<td class='s_ind'>Fecha de publicación</td>";
-          echo "<td s_content'>$newPublicDate</td>";
+          echo "<td class='s_content'>$newPublicDate</td>";
           echo "<td class='s_ind'>Fecha del robo</td>";
-           echo "<td s_content'>$newTheftDate</td>";
+           echo "<td class='s_content'>$newTheftDate</td>";
          echo "<tr>";
        if(file_exists("../../bicis/".$fila[12])){
                echo  "<td style='max-width: 25px;'><img src='../../bicis/"  . $fila[12]  . "' style='width: 100%;' /> </td>";
@@ -106,7 +106,7 @@
             }
           //echo "<td style='max-width: 25px;'><img src='../../bicis/"  . $fila[5]  . "' style='width: 100%;' />
         //</td>";
-        echo "<td colspan='3'>  $fila[5]</td>";
+        echo "<td colspan='3' class='s_content' >  $fila[5]</td>";
       echo "<tr>";
           echo "<td class='s_content'>Marca: $fila[6]</td>";
            echo "<td class='s_content'>Modelo: $fila[7]</td>";
@@ -117,13 +117,14 @@
         echo "<td colspan='4' class='s_content'> $fila[10]</td>";
       echo "</tr>";
       echo "<tr>";
+          echo "<td colspan='2' class='s_content'> Ubicación del robo: $fila[4] </td>";
         if(empty($fila[11]))
         {
-          echo "<td colspan='4' class='s_content'> Sin número de serie </td>";
+          echo "<td colspan='2' class='s_content'> Sin número de serie </td>";
         }
         else
         {
-          echo "<td colspan='4' class='s_content'> Número de série: $fila[11] </td>";
+          echo "<td colspan='2' class='s_content'> Número de série: $fila[11] </td>";
         }
       echo "</tr>";
       }

@@ -13,6 +13,8 @@
 	//Generamos una variable que nos dirá si ya hay una condición en la consulta previamente, o no.
 	$condicion	=	0;
 	$mysqli = new mysqli("localhost", "root", "", "projecte_1");
+	//formateamos el campo fecha, para que siga el estandar americano
+
 	if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 	}
@@ -40,6 +42,7 @@
 		//CONDICION FECHA ROBO
 		if($theft_date!="")
 		{
+			
 			if($condicion>0){
 				$con.=" AND (`anu_data_robatori` = '$theft_date')";
 			}

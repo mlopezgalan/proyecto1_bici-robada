@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <!-- saved from url=(0032)http://www.kingbarcelona.com/es/ -->
 <meta charset="utf-8">
 <html dir="LTR" lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
@@ -24,7 +24,21 @@
     //Funcion para validar  el formulario 
     function validar()
     {
+      
       var error="";
+      
+      if(document.getElementById("theft_date").value!="")
+      {
+        var m = document.getElementById("theft_date").value;
+        //alert(m);
+        var rgexp = /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/;
+
+        if(rgexp.test(m)==false)
+        {
+           error+="Error, el formato de la fecha no es correcto \n"
+        }
+       
+      }
       if(document.getElementById("brand").value==0)
       {
         error+="Error, la marca es obligatoria \n";
@@ -224,8 +238,8 @@
                                 <option value='Decathlon'>Decathlon</option>
                                 <option value='Bicing'>Bicing</option>
                                 <option value='BH'>BH</option>
-                                <option value='otras'>otras</option>
-                                <option value='all'>todas</option>
+                                <option value='otras'>Otras</option>
+                                <option value='all'>Todas</option>
                             </select>
                           </li>
                         </ul>
@@ -298,6 +312,7 @@
         <?php
         if(isset($_POST['submit']))
         {
+          unset($_POST['submit']);
           include("busca_bici.php");
          }
         ?>
