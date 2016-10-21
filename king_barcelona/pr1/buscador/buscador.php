@@ -154,7 +154,7 @@
                         <ul>
                           <li>
                             Fecha del robatorio:
-                            <input type="date" name="theft_date" id="theft_date">
+                            <input type="textbox" name="theft_date" id="theft_date">
                           </li>
                         </ul>
                         <ul>
