@@ -35,6 +35,7 @@
 
         if(rgexp.test(m)==false)
         {
+          document.getElementById("theft_date").style.borderColor="red";
            error+="Error, el formato de la fecha no es correcto \n"
         }
        

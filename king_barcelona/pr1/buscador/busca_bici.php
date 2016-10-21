@@ -32,9 +32,21 @@
 	if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 	}
-	$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
+	if($color2!="0")
+	{
+		$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
 		FROM `anunci`
 		WHERE `anu_color`LIKE '%$color%' OR `anu_color`LIKE '%$r_color%'  ";
+	}
+	else
+	{
+
+		$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
+		FROM `anunci`
+		WHERE `anu_color`LIKE '%$color%'";
+	
+	}
+	
 	//vamos montando la consulta conforme las variables recibidas y controlando si hemos tenido una condicion previa o no.
 
 	//CONSULTA CON CONDICIONES
