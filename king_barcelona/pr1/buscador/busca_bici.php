@@ -64,6 +64,16 @@
 		if($theft_date!="")
 		{
 			$con.=" AND (`anu_data_robatori` = '$theft_date')";
+			
+			if($condicion>0){
+				$con.=" AND (`anu_data_robatori` = '$theft_date')";
+			}
+			else
+			{
+				$condicion++;
+				$con.=	"`anu_data_robatori` = '$theft_date'";
+			}
+
 		}
 		//END CONDICION FECHA ROBO
 
