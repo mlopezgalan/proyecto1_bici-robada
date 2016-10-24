@@ -16,13 +16,6 @@
 		$theft_date	=	date("Y/m/d",strtotime($theft_date));
 		//echo " " .$theft_date;die;
 	}
-	//Si la bicicleta tiene un color compuesto, lo agregamos a la variable color
-	if($color2!="0")
-			{
-				$r_color	=	$color2 . " y " . $color;
-				//echo $r_color;
-				$color.= " y " . $color2;
-			}
 	
 	//Generamos una variable que nos dirá si ya hay una condición en la consulta previamente, o no.
 	$condicion	=	0;
@@ -32,21 +25,9 @@
 	if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 	}
-	if($color2!="0")
-	{
-		$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
+	$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
 		FROM `anunci`
-		WHERE `anu_color`LIKE '%$color%' OR `anu_color`LIKE '%$r_color%'  ";
-	}
-	else
-	{
-
-		$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
-		FROM `anunci`
-		WHERE `anu_color`LIKE '%$color%'";
-	
-	}
-	
+		WHERE";
 	//vamos montando la consulta conforme las variables recibidas y controlando si hemos tenido una condicion previa o no.
 
 	//CONSULTA CON CONDICIONES
@@ -54,16 +35,20 @@
 	//CONDICION TITULO
 		if($title!="")
 		{
-			
-			$con.=" AND (`anu_titol` = '$title')";
+			if($condicion>0){
+				$con.=" AND (`anu_titol` = '$title')";
+			}
+			else{
+				$condicion++;
+				$con.=	" `anu_titol` = '$title'";
+			}
 		
-		}
+	}
 	//END CONDICION TITULO
 
 		//CONDICION FECHA ROBO
 		if($theft_date!="")
 		{
-			$con.=" AND (`anu_data_robatori` = '$theft_date')";
 			
 			if($condicion>0){
 				$con.=" AND (`anu_data_robatori` = '$theft_date')";
@@ -73,14 +58,21 @@
 				$condicion++;
 				$con.=	"`anu_data_robatori` = '$theft_date'";
 			}
-
 		}
 		//END CONDICION FECHA ROBO
 
 		//CONDICION UBICACION
 		if($location!="" AND $location!=0)
 		{
-			$con.=" AND (`anu_ubicacio_robatori` = '$location')";
+			if($condicion>0)
+			{
+				$con.=" AND (`anu_ubicacio_robatori` = '$location')";
+			}
+			else
+			{
+				$condicion++;
+				$con.=	"`anu_ubicacio_robatori` = '$location'";
+			}
 		}
 		//END CONDICION ROBO
 
@@ -88,12 +80,20 @@
 		//echo $brand;die;
 		if($brand!=0 OR $brand!="all")
 		{
-			$con.=" AND (`anu_marca` = '$brand')";
+				if($condicion>0)
+				{
+					$con.=" AND (`anu_marca` = '$brand')";
+				}
+				else
+				{
+					$condicion++;
+					$con.=	" `anu_marca` = '$brand'";
+				}
 		}
 		//END CONDICION MARCA
 
 		//CONDICION COLOR
-		/*if($color!="0")
+		if($color!="0")
 		{	
 			//CONDICION COLOR2
 			//Si el color 2 esta definido, lo sumamos a la variable color
@@ -113,25 +113,43 @@
 				$condicion++;
 				$con.=	" `anu_color`LIKE '%$color%'";
 			}
-		}*/
+		}
 		//END CONDICION COLOR
 
 		//Condicion modelo
 		if($model!="")
-		{
-			$con.=" AND (`anu_model` = '$model')";
+			{
+				if($condicion>0){
+					$con.=" AND (`anu_model` = '$model')";
+			}
+		else
+			{
+				$condicion++;
+				$con.=	" `anu_model` = '$model'";
+			}
 		}
-		
 		// END CONDICION MODELO
 
 		//CONDICION COMPENSACION
 		if($compensation!="")
 			{
-				$con.=" AND (`anu_compensacio` = '$compensation')";
+				if($condicion>0)
+				{
+					$con.=" AND (`anu_compensacio` = '$compensation')";
+				}
+		else
+			{
+				$condicion++;
+				$con.=	"`anu_compensacio` = '$compensation'";
 			}
+		}
 	//END CONDICION COMPENSACION
-	//SI EL USUARIO,  TODAS LAS MARCAS, MODIFICAMOS LA CONSULTA, PARA EXTRAER EL WHERE DE LA VARIABLE CONSULTA
-		
+	//SI EL USUARIO, HA PUESTO TODOS LOS COLORES Y TODAS LAS MARCAS, MODIFICAMOS LA CONSULTA, PARA EXTRAER EL WHERE DE LA VARIABLE CONSULTA
+		if($condicion ==	0)
+		{
+			$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
+		FROM `anunci`";
+		}
 	//END CONTROL WHERE
 	//END CONSULTA SELECCION
 		//echo $condicion;
