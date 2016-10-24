@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <!-- saved from url=(0032)http://www.kingbarcelona.com/es/ -->
 <meta charset="utf-8">
 <html dir="LTR" lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
@@ -24,7 +24,22 @@
     //Funcion para validar  el formulario 
     function validar()
     {
+      
       var error="";
+      
+      if(document.getElementById("theft_date").value!="")
+      {
+        var m = document.getElementById("theft_date").value;
+        //alert(m);
+        var rgexp = /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/;
+
+        if(rgexp.test(m)==false)
+        {
+          document.getElementById("theft_date").style.borderColor="red";
+           error+="Error, el formato de la fecha no es correcto \n"
+        }
+       
+      }
       if(document.getElementById("brand").value==0)
       {
         error+="Error, la marca es obligatoria \n";
@@ -140,7 +155,7 @@
                         <ul>
                           <li>
                             Fecha del robatorio:
-                            <input type="date" name="theft_date" id="theft_date">
+                            <input type="textbox" name="theft_date" id="theft_date">
                           </li>
                         </ul>
                         <ul>
@@ -223,8 +238,9 @@
                                 <option value='Evil'>Evil</option>
                                 <option value='Decathlon'>Decathlon</option>
                                 <option value='Bicing'>Bicing</option>
-                                <option value='otras'>otras</option>
-                                <option value='all'>todas</option>
+                                <option value='BH'>BH</option>
+                                <option value='otras'>Otras</option>
+                                <option value='all'>Todas</option>
                             </select>
                           </li>
                         </ul>
@@ -297,6 +313,7 @@
         <?php
         if(isset($_POST['submit']))
         {
+          unset($_POST['submit']);
           include("busca_bici.php");
          }
         ?>
@@ -311,14 +328,16 @@
 <!-- footer //-->
 </td></tr><tr><td colspan="3">
 <center>
-<table border="0" width="55%" cellspacing="0" cellpadding="1">
-  <tbody><tr class="footer">
-    <td class="footer">lunes 17 octubre, 2016</td>
-    <td align="right" class="footer">&nbsp;&nbsp;278.934.827 peticiones desde jueves 01 junio, 2006&nbsp;&nbsp;</td>
-  </tr>
-  <tr><td class="subBar" align="center" colspan="2"><a href="https://www.confianzaonline.es/empresas/kingbarcelona.htm" target="_blank"><img src="../../kingbarcelona_files/sellomedianoanimado.gif" border="0" alt="Entidad adherida a Confianza Online"></a></td></tr>
-  <tr><td class="subBar" align="center" colspan="2">King Barcelona S.L. - CIF B65238628 - Registro mercantil 163252/105430 | c/ Pau Muñoz i Castanyer 16 Local 4, 08174 Sant Cugat del Vallés (España)</td></tr>
-</tbody></table></center>
+    <table border="0" width="1060px" cellspacing="0" cellpadding="1">
+    <tbody><tr class="footer">
+     <td class="footer">lunes 17 octubre, 2016</td>
+     <td align="right" class="footer">&nbsp;&nbsp;278.934.827 peticiones desde jueves 01 junio, 2006&nbsp;&nbsp;</td>
+    </tr>
+    <tr><td class="subBar" align="center" colspan="2"><a href="https://www.confianzaonline.es/empresas/kingbarcelona.htm" target="_blank"><img src="../../kingbarcelona_files/sellomedianoanimado.gif" border="0" alt="Entidad adherida a Confianza Online"></a></td></tr>
+    <tr><td class="subBar" align="center" colspan="2">King Barcelona S.L. - CIF B65238628 - Registro mercantil 163252/105430 | c/ Pau Muñoz i Castanyer 16 Local 4, 08174 Sant Cugat del Vallés (España)</td></tr>
+  </tbody>
+  </table>
+  </center>
 
 <div align="center">
 <a href="http://validator.w3.org/check?uri=referer" target="_new"><img src="../../kingbarcelona_files/valid-html401-blue" alt="Valid HTML 4.01 Transitional" height="31" width="88" border="0"></a>

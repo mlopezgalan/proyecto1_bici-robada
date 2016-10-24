@@ -9,16 +9,44 @@
 <?php
 	//Extraemos las variables que recibimos del formulario
 	extract($_POST);
-	//echo $color2;die;
+	//en caso de que nos hayan introducido una fecha la convertimos la fecha en formato americano
+	if($theft_date!=""){
+		//echo $theft_date;
+		$theft_date	=	str_replace('/', '-', $theft_date);
+		$theft_date	=	date("Y/m/d",strtotime($theft_date));
+		//echo " " .$theft_date;die;
+	}
+	//Si la bicicleta tiene un color compuesto, lo agregamos a la variable color
+	if($color2!="0")
+			{
+				$r_color	=	$color2 . " y " . $color;
+				//echo $r_color;
+				$color.= " y " . $color2;
+			}
+	
 	//Generamos una variable que nos dirá si ya hay una condición en la consulta previamente, o no.
 	$condicion	=	0;
 	$mysqli = new mysqli("localhost", "root", "", "projecte_1");
+	//formateamos el campo fecha, para que siga el estandar americano
+
 	if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 	}
-	$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
+	if($color2!="0")
+	{
+		$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
 		FROM `anunci`
-		WHERE";
+		WHERE `anu_color`LIKE '%$color%' OR `anu_color`LIKE '%$r_color%'  ";
+	}
+	else
+	{
+
+		$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
+		FROM `anunci`
+		WHERE `anu_color`LIKE '%$color%'";
+	
+	}
+	
 	//vamos montando la consulta conforme las variables recibidas y controlando si hemos tenido una condicion previa o no.
 
 	//CONSULTA CON CONDICIONES
@@ -26,43 +54,23 @@
 	//CONDICION TITULO
 		if($title!="")
 		{
-			if($condicion>0){
-				$con.=" AND (`anu_titol` = '$title')";
-			}
-			else{
-				$condicion++;
-				$con.=	" `anu_titol` = '$title'";
-			}
+			
+			$con.=" AND (`anu_titol` = '$title')";
 		
-	}
+		}
 	//END CONDICION TITULO
 
 		//CONDICION FECHA ROBO
 		if($theft_date!="")
 		{
-			if($condicion>0){
-				$con.=" AND (`anu_data_robatori` = '$theft_date')";
-			}
-			else
-			{
-				$condicion++;
-				$con.=	"`anu_data_robatori` = '$theft_date'";
-			}
+			$con.=" AND (`anu_data_robatori` = '$theft_date')";
 		}
 		//END CONDICION FECHA ROBO
 
 		//CONDICION UBICACION
 		if($location!="" AND $location!=0)
 		{
-			if($condicion>0)
-			{
-				$con.=" AND (`anu_ubicacio_robatori` = '$location')";
-			}
-			else
-			{
-				$condicion++;
-				$con.=	"`anu_ubicacio_robatori` = '$location'";
-			}
+			$con.=" AND (`anu_ubicacio_robatori` = '$location')";
 		}
 		//END CONDICION ROBO
 
@@ -70,20 +78,12 @@
 		//echo $brand;die;
 		if($brand!=0 OR $brand!="all")
 		{
-				if($condicion>0)
-				{
-					$con.=" AND (`anu_marca` = '$brand')";
-				}
-				else
-				{
-					$condicion++;
-					$con.=	" `anu_marca` = '$brand'";
-				}
+			$con.=" AND (`anu_marca` = '$brand')";
 		}
 		//END CONDICION MARCA
 
 		//CONDICION COLOR
-		if($color!="0")
+		/*if($color!="0")
 		{	
 			//CONDICION COLOR2
 			//Si el color 2 esta definido, lo sumamos a la variable color
@@ -103,43 +103,25 @@
 				$condicion++;
 				$con.=	" `anu_color`LIKE '%$color%'";
 			}
-		}
+		}*/
 		//END CONDICION COLOR
 
 		//Condicion modelo
 		if($model!="")
-			{
-				if($condicion>0){
-					$con.=" AND (`anu_model` = '$model')";
-			}
-		else
-			{
-				$condicion++;
-				$con.=	" `anu_model` = '$model'";
-			}
+		{
+			$con.=" AND (`anu_model` = '$model')";
 		}
+		
 		// END CONDICION MODELO
 
 		//CONDICION COMPENSACION
 		if($compensation!="")
 			{
-				if($condicion>0)
-				{
-					$con.=" AND (`anu_compensacio` = '$compensation')";
-				}
-		else
-			{
-				$condicion++;
-				$con.=	"`anu_compensacio` = '$compensation'";
+				$con.=" AND (`anu_compensacio` = '$compensation')";
 			}
-		}
 	//END CONDICION COMPENSACION
-	//SI EL USUARIO, HA PUESTO TODOS LOS COLORES Y TODAS LAS MARCAS, MODIFICAMOS LA CONSULTA, PARA EXTRAER EL WHERE DE LA VARIABLE CONSULTA
-		if($condicion ==	0)
-		{
-			$con 	=	"SELECT `anu_id`,`anu_titol`,`anu_data_anunci`,`anu_data_robatori`,`anu_descripcio_robatori`,`anu_foto`,`anu_compensacio`
-		FROM `anunci`";
-		}
+	//SI EL USUARIO,  TODAS LAS MARCAS, MODIFICAMOS LA CONSULTA, PARA EXTRAER EL WHERE DE LA VARIABLE CONSULTA
+		
 	//END CONTROL WHERE
 	//END CONSULTA SELECCION
 		//echo $condicion;
@@ -147,21 +129,25 @@
 		//echo $con;die;
 	
 	$result	=	mysqli_query($mysqli,$con);
-	 $total  = mysqli_num_rows($result); 
+	$total  = mysqli_num_rows($result); 
   	if($total!=0)
 
 	{
 	
 		while ($fila = mysqli_fetch_row($result)) 
 		{
+			//Formateamos las fechas al estilo europeo
+			$newTheftDate	=	date("d-m-Y",strtotime($fila[3]));
+			$newPublicDate	=	date("d-m-Y",strtotime($fila[2]));
+			//echo $newDate;die;
 	       echo "<tr>";
 	      	 echo "<td colspan='4' name='title' class='s_title'><a href='ficha.php?id=".$fila[0]."'target='_blank'>$fila[1]</a></td>";
 	       echo "</tr>";
 	       echo "<tr>";
 	     	  echo "<td class='s_ind'>Fecha de publicación</td>";
-	     	  echo "<td class='s_content'>$fila[2]</td>";
+	     	  echo "<td class='s_content'>$newPublicDate</td>";
 	     	  echo "<td class='s_ind'>Fecha del robo</td>";
-	      	 echo "<td class='s_content'>$fila[3]</td>";
+	      	 echo "<td class='s_content'>$newTheftDate</td>";
 	       echo "<tr>";
 	        if(file_exists("../../bicis/".$fila[5])){
 	        		 echo  "<td style='max-width: 25px;'><img src='../../bicis/"  . $fila[5]  . "' style='width: 100%;' /> </td>";
