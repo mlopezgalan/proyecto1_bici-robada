@@ -1,1 +1,3 @@
-Este es un texto para hacer la validación de conflictos en github.
+
+Este es un texto para resolver conflictos en github ;D tu turno Miguel
+
