@@ -1,1 +1,1 @@
-Este es un texto para resolver conflictos en github ;D
+Este es un texto para hacer la validación de conflictos en github.
